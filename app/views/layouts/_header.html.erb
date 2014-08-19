@@ -1,38 +1,39 @@
-<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <%= link_to "Mastermind", root_path, class: "navbar-brand" %>
-    </div>
+<nav class="top-bar" data-topbar>
+  <ul class="title-area">
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li class="active"><%= link_to "Find", "#" %></li>
-        <li><%= link_to "Start", "#" %></li>
-        <li class="dropdown">
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
+  <li class="name">
+    <h1><%= link_to "Mastermind", root_path %></h1>
+
+</li>
+<li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+</ul>
+<section class="top-bar-section">
+ 
+<ul class="left">
+  <li class="divider"></li>
+  <li><%= link_to "Find", "#", class: "active" %></li>
+  <li class="divider"></li>
+  <li><%= link_to "Start", "#" %></li>
+  <li class="divider"></li>
+</ul>
+
+      <ul class="right">
         <% if user_signed_in? %>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Account <span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
+        <li class="divider"></li>
+        <li class="has-dropdown">
+          <a href="#"> Account </a>
+          <ul class="dropdown">
             <li><%= link_to "Profile", current_user %></li>
             <li><%= link_to "Settings", edit_user_registration_path %></li>
-            <li class="divider"></li>
             <li><%= link_to "Sign Out", destroy_user_session_path ,method: :delete%></li>
           </ul>
+          <li class="divider"></li>
         </li>
         <% else %>
+        <li class="divider"></li>
         <li><%= link_to "Sign In", new_user_session_path %></li>
+        <li class="divider"></li>
         <% end %>
       </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
+</section>
 </nav>

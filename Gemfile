@@ -5,6 +5,12 @@ source 'https://rubygems.org'
 gem 'rails', '4.1.4'
 gem 'devise', '~> 3.3.0'
 gem 'omniauth-linkedin', '~> 0.2.0'
+gem 'foundation-rails', '~> 5.3.3'
+gem 'font-awesome-rails', '4.1.0'
+
+group :development do 
+	gem 'quiet_assets', '~> 1.0.3'
+end
 
 # Use postgresql as the database for Active Record
 gem 'pg'

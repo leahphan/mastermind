@@ -15,7 +15,13 @@
 		<%= render 'layouts/header' %>
 			<p class="notice"><%= notice %></p>
       <p class="alert"><%= alert %></p>
-		    <%= yield %>
+
+        <div class="row collapse">
+          <div class="small-12 small-centered medium-8 medium-centered large-5 large-centered columns">
+            <%= yield %>
+          </div>
+        </div>
+        
 		    <%= javascript_include_tag "application" %>
 	  	<%= render 'layouts/footer' %>
   </body>
