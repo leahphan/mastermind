@@ -1,4 +1,8 @@
 class User < ActiveRecord::Base
+
+  has_many :memberships
+  has_many :groups, :through => :memberships
+  
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -20,6 +24,18 @@ class User < ActiveRecord::Base
         user.email = data["email"] if user.email.blank?
       end
     end
+  end
+
+  def join!(group)
+    memberships.create!(group_id: group.id)
+  end
+
+  def leave!(group)
+    memberships.find_by(group_id: group.id).destroy
+  end
+
+  def member_of?(group)
+    memberships.find_by(group_id: group.id)
   end
 
 end
