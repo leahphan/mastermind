@@ -17,8 +17,12 @@
         <td><%= group.description %></td>
         <td><%= group.user_id %></td>
         <td><%= link_to 'Show', group %></td>
+      <% if can? :update, group %>
         <td><%= link_to 'Edit', edit_group_path(group) %></td>
+      <% end %>
+      <% if can? :destroy, group %>
         <td><%= link_to 'Destroy', group, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <% end %>
       </tr>
     <% end %>
   </tbody>

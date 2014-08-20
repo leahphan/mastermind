@@ -26,13 +26,6 @@ class User < ActiveRecord::Base
     end
   end
 
-  def join!(group)
-    memberships.create!(group_id: group.id)
-  end
-
-  def leave!(group)
-    memberships.find_by(group_id: group.id).destroy
-  end
 
   def member_of?(group)
     memberships.find_by(group_id: group.id)
