@@ -21,6 +21,7 @@
       <%= user.email %>
       <%= user.name %>
       <%= image_tag(user.image) %>
+      <%= link_to 'Remove Member', reject_membership_path(user.memberships.first), method: :put %>
 		<% end %> 
 	</div>
 <% end %>

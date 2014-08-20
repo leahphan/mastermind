@@ -29,8 +29,12 @@ class User < ActiveRecord::Base
   end
 
 
-  def member_of?(group)
-    memberships.find_by(group_id: group.id)
+  def approved_member_of?(group)
+    memberships.where("group_id = ? AND state = ?", group.id, 'approved').exists? 
+  end
+
+  def pending_member_of?(group)
+    memberships.where("group_id = ? AND state = ?", group.id, 'pending').exists? 
   end
 
 end

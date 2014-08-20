@@ -1,0 +1,11 @@
+<h1>Membership Request</h1>
+
+<% if @membership.pending? %>
+
+<h2>Would you like to approve <%= @user.name %> to become a member of <%= @membership.group.name %>? </h2>
+	<%= form_for @membership, builder: FoundationFormBuilder, url: approve_membership_path(@membership), method: :put do |form| %>
+		<%= submit_tag "Approve Member" %>
+	<% end %>
+<% end %>
+
+

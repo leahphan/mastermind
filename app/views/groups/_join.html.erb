@@ -1,5 +1,5 @@
   <%= form_for @membership, :url => url_for(:controller => 'memberships', :action => 'create')  do |f| %> 
 		<%= f.hidden_field :group_id, :value => @group.id %>
-		<%= f.hidden_field :user_id, :value => current_user.id %>
-		<%= f.submit "Join", class: "btn btn-large btn-primary" %>
+		<%= f.hidden_field :user_id, :value => @user.id %>
+		<%= f.submit "Reqest to Join", class: "btn btn-large btn-primary" %>
 	<% end %>

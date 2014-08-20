@@ -9,12 +9,18 @@ class GroupsController < ApplicationController
   # GET /groups.json
   def index
     @groups = Group.all
+    @membership = Membership.where(:user_id => current_user)
   end
 
   # GET /groups/1
   # GET /groups/1.json
   def show
     @membership = Membership.new
+    if current_user
+      @user = current_user 
+    else
+      @user = User.new # represents a guest user
+    end
   end
 
   # GET /groups/new
@@ -30,7 +36,12 @@ class GroupsController < ApplicationController
   # POST /groups.json
   def create
     @group = Group.new(group_params)
-
+    if current_user
+      @user = current_user 
+    else
+      @user = User.new # represents a guest user
+    end
+    
     respond_to do |format|
       if @group.save
         format.html { redirect_to @group, notice: 'Group was successfully created.' }

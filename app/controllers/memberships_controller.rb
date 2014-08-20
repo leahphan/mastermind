@@ -1,21 +1,51 @@
 class MembershipsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :delete, :destroy]
 
-  def create 
-    @membership = Membership.create!(membership_params)
-
-    if @membership.save
-  	flash[:success] = "Your request to join the group has been received. You will receive an email once the Group Owner has approved your request."
-    redirect_to groups_url
+  # Before filter for CanCan 
+  load_and_authorize_resource
+  
+  def approve 
+    @membership = current_user.memberships.find(params[:id])
+    if @membership.approve!
+      flash[:success] = "Request approved."
+    else 
+      flash[:error] = "That request could not be approved."
     end
+    redirect_to groups_url
+  end
+
+  def reject 
+    @membership = Membership.find(params[:id])
+    if @membership.reject!
+      flash[:success] = "Member rejected from group."
+    else 
+      flash[:error] = "That request could not be rejected."
+    end
+    redirect_to groups_url  
+  end
+
+  def create 
+    @membership = Membership.request(params[:membership][:group_id], params[:membership][:user_id])
+
+    if @membership.new_record?
+      flash[:error] = "There was a problem creating your request to join a group."
+    else
+  	 flash[:success] = "Your request to join the group has been sent. You will receive an email once the Group Owner has approved your request."
+    end
+    redirect_to groups_url
+  end
+
+  def edit 
+    @membership = current_user.memberships.find(params[:id])
+    @user = @membership.user 
   end
 
   def destroy
   	@membership = Membership.where(:user_id => params[:membership][:user_id], :group_id => params[:membership][:group_id]).first
     if @membership.destroy!
     flash[:success] = "You have left this Mastermind group."
-    redirect_to groups_url
     end
+    redirect_to groups_url
   end
 
   private

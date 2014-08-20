@@ -1,6 +1,8 @@
 <div id="join_form">
-<% if current_user.member_of?(@group) %>
+<% if @user.approved_member_of?(@group) %>
 	<%= render 'leave' %>
+<% elsif @user.pending_member_of?(@group)%>
+	<%= render 'cancel_join' %>
 <% else %>
 	<%= render 'join' %>
 <% end %>

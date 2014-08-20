@@ -4,12 +4,20 @@ class Ability
   def initialize(user)
     user ||= User.new # represents a guest user
 
+    alias_action :create, :read, :update, :destroy, :to => :crud
+
     can :manage, Group do |group|
         group.owners.include?(user)
     end
 
+    can [:approve, :reject], Membership do |membership|
+        membership.group.owners.include?(user)
+    end
+
     can :read, :all
     can :create, Group
+    can :create, Membership 
+    can :crud, Membership, :user_id => user.id 
 
     # Define abilities for the passed in user here. For example:
     #
