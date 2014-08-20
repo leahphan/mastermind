@@ -12,6 +12,7 @@
 
   <tbody>
     <% @groups.each do |group| %>
+    <div id="<%= dom_id(group) %>" class="group row">
       <tr>
         <td><%= group.name %></td>
         <td><%= group.description %></td>
@@ -25,6 +26,7 @@
       <% end %>
       </tr>
     <% end %>
+  </div>
   </tbody>
 </table>
 

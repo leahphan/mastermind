@@ -1,8 +1,4 @@
-<p id="notice"><%= notice %></p>
-
 <%= render 'join_form' %>
-
-
 <p>
   <strong>Name:</strong>
   <%= @group.name %>
@@ -19,15 +15,15 @@
 </p>
 
 
-			<% if @group.users.any? %>
-			<h2>Members</h2>
-					<% @group.users.each do |user| %>
-            <%= user.email %>
-            <%= user.name %>
-            <%= image_tag(user.image) %>
-					<% end %> 
-				</div>
-			<% end %>
+<% if @group.users.any? %>
+<h2>Members</h2>
+		<% @group.users.each do |user| %>
+      <%= user.email %>
+      <%= user.name %>
+      <%= image_tag(user.image) %>
+		<% end %> 
+	</div>
+<% end %>
 
 
 

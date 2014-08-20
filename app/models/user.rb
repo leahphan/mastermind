@@ -1,9 +1,11 @@
 class User < ActiveRecord::Base
 
   has_many :memberships
-  has_many :groups, :through => :memberships
-  
-  # Include default devise modules. Others available are:
+  has_many :groups, -> { where(memberships: { state: "approved" }) }, 
+            :through => :memberships
+  has_many :pending_groups, -> { where(memberships: { state: "pending" }) },        through: :pending_memberships, 
+            source: :group
+     # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, 

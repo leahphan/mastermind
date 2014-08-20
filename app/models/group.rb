@@ -1,7 +1,11 @@
 class Group < ActiveRecord::Base
 
 	has_many :memberships
-  has_many :users, :through => :memberships
+  has_many :users, -> { where(memberships: { state: "approved" }) },
+            :through => :memberships
+  has_many :pending_members, -> { where(memberships: { state: "pending" }) },        through: :pending_memberships, 
+            source: :user 
+
   after_save :make_owner
 
   def make_owner
