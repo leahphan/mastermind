@@ -3,15 +3,20 @@ class MembershipsController < ApplicationController
 
   # Before filter for CanCan 
   load_and_authorize_resource
-  
+
+  def review
+    @membership = Membership.find(params[:id])
+    @user = @membership.user 
+  end
+
   def approve 
-    @membership = current_user.memberships.find(params[:id])
+    @membership = Membership.find(params[:id])
     if @membership.approve!
       flash[:success] = "Request approved."
     else 
       flash[:error] = "That request could not be approved."
     end
-    redirect_to groups_url
+    redirect_to(:back)
   end
 
   def reject 
@@ -21,7 +26,7 @@ class MembershipsController < ApplicationController
     else 
       flash[:error] = "That request could not be rejected."
     end
-    redirect_to groups_url  
+    redirect_to(:back)
   end
 
   def create 
@@ -32,7 +37,7 @@ class MembershipsController < ApplicationController
     else
   	 flash[:success] = "Your request to join the group has been sent. You will receive an email once the Group Owner has approved your request."
     end
-    redirect_to groups_url
+    redirect_to(:back)
   end
 
   def edit 
@@ -45,7 +50,7 @@ class MembershipsController < ApplicationController
     if @membership.destroy!
     flash[:success] = "You have left this Mastermind group."
     end
-    redirect_to groups_url
+    redirect_to(:back)
   end
 
   private

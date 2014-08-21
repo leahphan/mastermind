@@ -1,6 +1,6 @@
 class Group < ActiveRecord::Base
 
-	has_many :memberships
+	has_many :memberships, dependent: :destroy
   has_many :users, -> { where(memberships: { state: "approved" }) },
             :through => :memberships
   has_many :pending_members, -> { where(memberships: { state: "pending" }) },        through: :pending_memberships, 
@@ -10,7 +10,7 @@ class Group < ActiveRecord::Base
 
   def make_owner
     # Make membership to own group setting user as owner
-    self.memberships.create(:role => "owner", :user_id => self.user_id)
+    self.memberships.create(:role => "owner", :user_id => self.user_id, :state => "approved")
   end
 
   def owners

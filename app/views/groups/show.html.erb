@@ -1,38 +1,72 @@
-<%= render 'join_form' %>
-<p>
-  <strong>Name:</strong>
-  <%= @group.name %>
-</p>
+<div class="row"> 
+<div class="large-12 columns text-center">
+  <h1 class="page-title truncate"><%= @group.name %></h1>
+</div>
+</row>
+<div class="large-10 columns">
+<div class="row">
+  <dl class="sub-nav">
+    <dd class="active"><a href="#">Home</a></dd>
+    <dd><a href="#">Team</a></dd>
+    <dd><a href="#">Resources</a></dd>
+    <dd><a href="#">Weekly Accountability</a></dd>
+  </dl>
+</div>
+</div>
 
+<div class="large-2 columns text-center">
+  <%= render 'join_form' %></div>
+</div>
+
+<div class="row"> 
+
+
+
+
+
+<div class="large-9 push-3 columns">
+  <div class="panel">
+<h3>About <small>Our Mission</small></h3>
 <p>
-  <strong>Description:</strong>
   <%= @group.description %>
 </p>
-
 <p>
-  <strong>User:</strong>
-  <%= @group.user_id %>
-</p>
-
-
 <% if @group.users.any? %>
-<h2>Members</h2>
-		<% @group.users.each do |user| %>
+<h3>Team</h3>
+  <ul class="list no-bullet">
+    <% @group.users.each do |user| %>
+    <li id="<%= dom_id(user) %>" class="clearfix">
+      <%= image_tag(user.image) %>
       <%= user.email %>
       <%= user.name %>
-      <%= image_tag(user.image) %>
+      <% if can? :manage, @group %>
       <%= link_to 'Remove Member', reject_membership_path(user.memberships.first), method: :put %>
-		<% end %> 
-	</div>
+      <% end %>
+    </li>
+    <% end %> 
+  </ul>
 <% end %>
+</p>
+</div>
+</div>
 
 
-              <% if can? :update, @group %>
-                <%= link_to 'Edit', edit_group_path(@group) %>
-              <% end %>
-              <% if can? :destroy, @group %>
-                <%= link_to 'Destroy', @group, method: :delete, data: { confirm: 'Are you sure?' } %>
-              <% end %>
 
-<%= link_to 'Edit', edit_group_path(@group) %> |
-<%= link_to 'Back', groups_path %>
+  <div class="large-3 pull-9 columns">
+  <div class="panel">
+<p><img src="http://placehold.it/320x240&text=Ad"/></p>
+<ul class="side-nav">
+<li><a href="#">About</a></li>
+<li><a href="#">Members</a></li>
+<li><a href="#">Section 3</a></li>
+<li><a href="#">Section 4</a></li>
+<li><a href="#">Section 5</a></li>
+<li><a href="#">Section 6</a></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+
+

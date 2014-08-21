@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
 
-  has_many :memberships
+  has_many :memberships, dependent: :destroy
   has_many :groups, -> { where(memberships: { state: "approved" }) }, 
             :through => :memberships
   has_many :pending_groups, -> { where(memberships: { state: "pending" }) },        through: :pending_memberships, 
@@ -30,11 +30,15 @@ class User < ActiveRecord::Base
 
 
   def approved_member_of?(group)
-    memberships.where("group_id = ? AND state = ?", group.id, 'approved').exists? 
+    memberships.where("group_id = ? AND state = ?", group.id, 'approved').exists? && memberships.where.not("group_id = ? AND role = ?", group.id, "owner").exists?
   end
 
   def pending_member_of?(group)
     memberships.where("group_id = ? AND state = ?", group.id, 'pending').exists? 
+  end
+
+  def owner?(group)
+    memberships.where("group_id = ? AND role = ?", group.id, "owner").exists?
   end
 
 end

@@ -13,9 +13,9 @@
 
   <body>
 		<%= render 'layouts/header' %>
-			<p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
-
+    <%= render partial: "layouts/flash" %>
+      <br \>
+      <br \>
         <div class="row collapse">
           <div class="small-12 small-centered medium-8 medium-centered large-5 large-centered columns">
             <%= yield %>

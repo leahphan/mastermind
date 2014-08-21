@@ -10,7 +10,7 @@ class Ability
         group.owners.include?(user)
     end
 
-    can [:approve, :reject], Membership do |membership|
+    can [:review, :approve, :reject], Membership do |membership|
         membership.group.owners.include?(user)
     end
 
