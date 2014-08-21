@@ -13,7 +13,7 @@
   <li class="divider"></li>
   <li><%= link_to "Find", "#", class: "active" %></li>
   <li class="divider"></li>
-  <li><%= link_to "Start", "#" %></li>
+  <li><%= link_to "Start", new_group_path %></li>
   <li class="divider"></li>
 </ul>
 
@@ -30,6 +30,8 @@
           <li class="divider"></li>
         </li>
         <% else %>
+        <li class="divider"></li>
+        <li class="has-form"><%= link_to "Sign Up", new_user_registration_path, class: "small button" %></li>
         <li class="divider"></li>
         <li><%= link_to "Sign In", new_user_session_path %></li>
         <li class="divider"></li>

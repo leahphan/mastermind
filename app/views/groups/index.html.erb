@@ -1,35 +1,36 @@
-<h1>Listing groups</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>User</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @groups.each do |group| %>
-    <div id="<%= dom_id(group) %>" class="group row">
-      <tr>
-        <td><%= group.name %></td>
-        <td><%= group.description %></td>
-        <td><%= group.user_id %></td>
-        <td><%= link_to 'Show', group %></td>
-      <% if can? :update, group %>
-        <td><%= link_to 'Edit', edit_group_path(group) %></td>
-      <% end %>
-      <% if can? :destroy, group %>
-        <td><%= link_to 'Destroy', group, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      <% end %>
-      </tr>
-    <% end %>
-  </div>
-  </tbody>
-</table>
-
+<section id="homepage-hero">
+<div class="row">
+<div class="medium-7 large-6 columns">
+<h1>Mastermind Groups are</h1><br>
+<h3>people getting together to help each <br class="hide-for-small">acheive greater success.</h3>
 <br>
+</div>
+</div>
+<div class="row">
+<div class="large-4 medium-6 columns">
+<a href="#" class="large button hide-for-small">How It Works</a>
+</div>
+</div>
+</section>
 
-<%= link_to 'New Group', new_group_path %>
+<section id="main-content center">
+  <div class="row">
+    <ul class="list groups-list no-bullet">
+      <% @groups.each do |group| %>
+          <%= link_to group_path(group) do %>
+        <li id="<%= dom_id(group) %>" class="clearfix">
+            <div class="small-12 medium-3 columns no-pad-left center">
+              <img src="http://placehold.it/300x300">
+            </div>
+            <div class="small-10 medium-9 columns truncate center" title="<%= group.name %>">
+              <%= group.name %>
+              <div class="row">
+                <%= group.description %>
+              </div>
+            </div>
+          <% end %>
+        </li>
+    <% end %>
+    </ul>
+  </div>
+</section>
