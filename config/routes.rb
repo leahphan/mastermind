@@ -16,6 +16,8 @@ Rails.application.routes.draw do
     end
   end
 
+  get 'tag/:tag', to: 'groups#index', as: :tag
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

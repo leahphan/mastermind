@@ -4,9 +4,7 @@
 <% elsif @user.pending_member_of?(@group) %>
 	<%= render 'cancel_join' %>
 <% elsif @user.owner?(@group) %>
-  <% if can? :update, @group %>
-    <%= link_to 'Edit', edit_group_path(@group), class: "button radius expand" %>
-  <% end %>
+   <%= link_to 'Edit', edit_group_path(@group), class: "button radius expand" %>
 <% else %>
 	<%= render 'join' %>
 <% end %>

@@ -8,8 +8,12 @@ class GroupsController < ApplicationController
   # GET /groups
   # GET /groups.json
   def index
-    @groups = Group.all
     @membership = Membership.where(:user_id => current_user)
+    if params[:tag] 
+      @groups = Group.tagged_with(params[:tag])
+    else
+      @groups = Group.all 
+    end
   end
 
   # GET /groups/1
@@ -85,6 +89,6 @@ class GroupsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def group_params
-      params.require(:group).permit(:name, :description, :user_id)
+      params.require(:group).permit(:name, :description, :user_id, :tag_list)
     end
 end

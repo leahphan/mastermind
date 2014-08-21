@@ -10,6 +10,8 @@ gem 'font-awesome-rails', '4.1.0'
 gem 'figaro', '0.7.0'
 gem 'state_machine', '1.2.0'
 gem 'cancancan', '~> 1.9'
+gem 'acts-as-taggable-on', '3.3.0'
+gem 'select2-rails', '3.5.9.1'
 
 group :development do 
 	gem 'quiet_assets', '~> 1.0.3'

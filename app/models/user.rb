@@ -30,7 +30,7 @@ class User < ActiveRecord::Base
 
 
   def approved_member_of?(group)
-    memberships.where("group_id = ? AND state = ?", group.id, 'approved').exists? && memberships.where.not("group_id = ? AND role = ?", group.id, "owner").exists?
+    memberships.where("group_id = ? AND state = ?", group.id, 'approved').exists? && memberships.where("group_id = ? AND role IS NULL", group.id).exists?
   end
 
   def pending_member_of?(group)

@@ -6,8 +6,9 @@
     <%= form_for(@group, builder: FoundationFormBuilder) do |f| %>
       <%= f.text_field :name %>
       <%= f.text_area :description %>
+      <%= f.text_field :tag_list, label: "Tags (seperated by commas)" %>
       <%= f.hidden_field :user_id, :value => current_user.id %>
-      <%= f.submit "Start Group" %>
+      <%= f.submit "Submit" %>
     <% end %>
 
   </div>

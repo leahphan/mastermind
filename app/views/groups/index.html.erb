@@ -13,6 +13,33 @@
 </div>
 </section>
 
+<div class="row">
+<div class="large-12 columns">
+<div class="radius panel">
+<div class="row collapse">
+<div class="large-10 small-8 columns text-center">
+  <%= form_tag groups_path, :method => 'get' do %>
+    <%= text_field_tag :tag_list, params[:search], :placeholder => "Search with Tags" %>
+</div>
+<div class="large-2 small-3 columns">
+  <%= submit_tag "Search", :name => nil, :class => "postifix button expand" %>
+  <% end %>
+</div>
+<div class="large-12 columns text-center">
+  <div id="tag_cloud">
+    <h3>Browse Popular Topics</h3>
+  <% tag_cloud Group.tag_counts, %w[s m l] do |tag, css_class| %>
+    <%= link_to tag.name, tag_path(tag.name), class: css_class %>
+  <% end %>
+  </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+
 <section id="main-content center">
   <div class="row">
     <ul class="list groups-list no-bullet">
@@ -26,6 +53,8 @@
               <%= group.name %>
               <div class="row">
                 <%= group.description %>
+                <p>
+                  Tags: <%= raw group.tag_list.map { |t| link_to t, tag_path(t) }.join(', ') %> 
               </div>
             </div>
           <% end %>
